@@ -1,0 +1,19 @@
+{
+  "app_title": "Mehad",
+  "login": "Login",
+  "signup": "Sign Up",
+  "email": "Email",
+  "password": "Password",
+  "name": "Full Name",
+  "account_type": "Account Type",
+  "client": "Client",
+  "contractor": "Contractor",
+  "consultant": "Consultant",
+  "description": "Short Description",
+  "discovery": "Discovery",
+  "filter_by_role": "Filter by Role",
+  "all": "All",
+  "profile": "Profile",
+  "logout": "Logout",
+  "rating": "Rating"
+}
