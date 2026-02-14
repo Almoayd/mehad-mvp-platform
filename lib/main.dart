@@ -3,12 +3,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'providers/auth_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'views/login_view.dart';
 import 'views/discovery_view.dart';
+import 'views/landing_view.dart';
+import 'views/dashboard_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    // If Firebase not configured, app will run in mock mode for MVP
+    print('Firebase init error (running in mock mode): $e');
+  }
   
   runApp(
     EasyLocalization(
@@ -46,6 +55,11 @@ class MehadApp extends StatelessWidget {
         textTheme: GoogleFonts.latoTextTheme(),
         useMaterial3: true,
       ),
+      routes: {
+        '/': (ctx) => const LandingView(),
+        '/login': (ctx) => const LoginView(),
+        '/dashboard': (ctx) => const DashboardView(),
+      },
       home: const AuthWrapper(),
     );
   }
@@ -59,8 +73,8 @@ class AuthWrapper extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     // In MVP, we can simulate auth state or just show discovery for demo
     if (authProvider.userModel != null) {
-      return const DiscoveryView();
+      return const DashboardView();
     }
-    return const LoginView();
+    return const LandingView();
   }
 }
